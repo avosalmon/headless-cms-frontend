@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
-import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home: NextPage = () => {

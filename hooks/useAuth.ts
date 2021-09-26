@@ -61,13 +61,9 @@ export default function useAuth(): Auth {
 
   const login = (providerName: string) => {
     const provider = getProvider(providerName);
-    return (
-      signInWithPopup(auth, provider)
-        // .then((userCredential) => {})
-        .catch((error) => {
-          console.log("Failed to sign-in.", error.message);
-        })
-    );
+    return signInWithPopup(auth, provider).catch((error) => {
+      console.log("Failed to sign-in.", error.message);
+    });
   };
 
   const logOut = () => signOut(auth);
