@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  User as FirebaseUser,
+  UserCredential as FirebaseUserCredential,
+} from "firebase/auth";
 import auth from "../libs/firebaseAuth";
 import { createUser, findUser } from "../libs/api/user";
 
@@ -13,6 +20,8 @@ export interface User {
 export interface Auth {
   user: User | null;
   loading: boolean;
+  login: (providerName: string) => Promise<void | FirebaseUserCredential>;
+  logOut: () => Promise<void>;
 }
 
 export default function useAuth(): Auth {
@@ -50,8 +59,32 @@ export default function useAuth(): Auth {
     return () => unsubscribe();
   }, []);
 
+  const login = (providerName: string) => {
+    const provider = getProvider(providerName);
+    return (
+      signInWithPopup(auth, provider)
+        // .then((userCredential) => {})
+        .catch((error) => {
+          console.log("Failed to sign-in.", error.message);
+        })
+    );
+  };
+
+  const logOut = () => signOut(auth);
+
+  const getProvider = (providerName: string) => {
+    switch (providerName) {
+      case "github":
+        return new GithubAuthProvider();
+      default:
+        throw new Error(`Unsupported provider given: ${providerName}`);
+    }
+  };
+
   return {
     user,
     loading,
+    login,
+    logOut,
   };
 }

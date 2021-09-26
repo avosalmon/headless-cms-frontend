@@ -1,6 +1,16 @@
+import { NextPage } from "next";
+import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
+import { useAuthContext } from "../hooks/useAuthContext";
 
-export default function Login(): JSX.Element {
+const Login: NextPage = () => {
+  const { login } = useAuthContext();
+  const router = useRouter();
+
+  const loginWithGithub = () => {
+    login("github").then(() => router.push("/posts"));
+  };
+
   return (
     <div className="flex flex-col justify-center min-h-screen py-12 bg-gray-50">
       <div className="flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-md">
@@ -23,6 +33,7 @@ export default function Login(): JSX.Element {
               <button
                 type="submit"
                 className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={loginWithGithub}
               >
                 Sign in with GitHub
               </button>
@@ -32,4 +43,6 @@ export default function Login(): JSX.Element {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, ReactNode, useContext } from "react";
 import useAuth, { Auth } from "./useAuth";
 
 const AuthContext = createContext<Auth>({
   user: null,
   loading: true,
+  login: async (providerName: string) => {},
+  logOut: async () => {},
 });
 
 interface Props {
