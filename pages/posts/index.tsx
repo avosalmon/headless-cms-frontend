@@ -1,19 +1,17 @@
-import { useEffect } from "react";
-import { NextPage } from "next";
-import { useRouter } from "next/dist/client/router";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import React, { ReactElement, ReactNode } from "react";
+import { NextPageWithLayout } from "../_app";
+import { Dashboard, Protected } from "../../layouts";
 
-const Posts: NextPage = () => {
-  const { user, loading } = useAuthContext();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!(loading || user)) {
-      router.push("/login");
-    }
-  }, [user, loading, router]);
-
+const Posts: NextPageWithLayout = () => {
   return <div>Posts</div>;
+};
+
+Posts.getLayout = (page: ReactElement): ReactNode => {
+  return (
+    <Protected>
+      <Dashboard>{page}</Dashboard>
+    </Protected>
+  );
 };
 
 export default Posts;

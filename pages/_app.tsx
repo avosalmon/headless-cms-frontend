@@ -6,7 +6,7 @@ import "../libs/axiosInterceptors";
 import "../styles/globals.css";
 import { AuthProvider } from "../hooks/useAuthContext";
 
-type NextPageWithLayout = NextPage & {
+export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
