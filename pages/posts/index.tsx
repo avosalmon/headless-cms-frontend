@@ -9,7 +9,7 @@ const Posts: NextPageWithLayout = () => {
 Posts.getLayout = (page: ReactElement): ReactNode => {
   return (
     <Protected>
-      <Dashboard>{page}</Dashboard>
+      <Dashboard title="Your posts">{page}</Dashboard>
     </Protected>
   );
 };
