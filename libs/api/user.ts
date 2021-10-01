@@ -3,9 +3,13 @@ import { User } from "../../types/user";
 
 const USER_PATH = "users";
 
+interface UserResponse {
+  data: User;
+}
+
 export async function createUser(): Promise<User | null> {
   try {
-    const { data } = await axios.post(USER_PATH);
+    const { data } = await axios.post<UserResponse>(USER_PATH);
     return data.data;
   } catch (error) {
     console.log("Failed to create a user", error);
@@ -15,7 +19,7 @@ export async function createUser(): Promise<User | null> {
 
 export async function findUser(id: string): Promise<User | null> {
   try {
-    const { data } = await axios.get(`${USER_PATH}/${id}`);
+    const { data } = await axios.get<UserResponse>(`${USER_PATH}/${id}`);
     return data.data;
   } catch (error) {
     console.log(`Failed to find a user with id: ${id}`, error);
