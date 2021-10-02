@@ -30,7 +30,7 @@ export default function Dashboard({ children }: Props): JSX.Element {
   }
 
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
           <>
@@ -190,9 +190,9 @@ export default function Dashboard({ children }: Props): JSX.Element {
         )}
       </Disclosure>
 
-      <main>
-        <div className="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="px-4 py-4 sm:px-0">{children}</div>
+      <main className="flex-1">
+        <div className="h-full py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="h-full px-4 py-4 sm:px-0">{children}</div>
         </div>
       </main>
     </div>
