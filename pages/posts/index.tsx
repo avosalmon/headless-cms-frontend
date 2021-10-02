@@ -9,10 +9,12 @@ const Posts: NextPageWithLayout = () => {
   const { posts, loading } = usePostCollection();
 
   if (loading) {
+    // TODO: render loading animation
     return <div>Loading posts...</div>;
   }
 
   if (!posts) {
+    // TODO: render proper error
     return <div>Failed to load posts.</div>;
   }
 
