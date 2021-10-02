@@ -7,9 +7,10 @@ type Sort = "published_at" | "updated_at";
 type Direction = "asc" | "desc";
 type Status = "published" | "draft";
 
-export async function getAllPosts(
+export async function getPosts(
   sort: Sort = "published_at",
   direction: Direction = "desc",
+  page = 1,
   status?: Status
 ): Promise<PostCollection | null> {
   try {
@@ -17,6 +18,7 @@ export async function getAllPosts(
       params: {
         sort,
         direction,
+        page,
         status,
       },
     });
