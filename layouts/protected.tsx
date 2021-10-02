@@ -16,6 +16,10 @@ export default function Protected({ children }: Props): JSX.Element {
     }
   }, [user, loading, router]);
 
+  if (loading) {
+    return <p>Loading auth state...</p>;
+  }
+
   // TODO: show loading animation while loading
   return <>{children}</>;
 }
