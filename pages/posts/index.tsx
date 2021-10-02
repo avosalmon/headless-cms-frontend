@@ -57,67 +57,95 @@ const Posts: NextPageWithLayout = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="pt-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-        <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-t-lg">
-          <table className="min-w-full">
-            <thead>
-              <tr>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Title
-                </th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Published At
-                </th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Updated At
-                </th>
-                <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                  Status
-                </th>
-                <th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.data.map((post, index) => (
-                <tr
-                  key={post.id}
-                  className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                >
-                  <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
-                    {post.title}
-                  </td>
-                  <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
-                    {post.published_at && formatDate(post.published_at)}
-                  </td>
-                  <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
-                    {post.updated_at && formatDate(post.updated_at)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {post.is_published ? (
-                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                        Published
-                      </span>
-                    ) : (
-                      <span className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">
-                        Draft
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-nowrap">
-                    <Link href={`/posts/${post.id}`}>
-                      <a className="text-indigo-600 hover:text-indigo-900">
-                        Edit
-                      </a>
-                    </Link>
-                  </td>
+    <>
+      <div className="flex flex-col">
+        <div className="pt-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+          <div className="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-t-lg">
+            <table className="min-w-full">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Title
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Published At
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Updated At
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {posts.data.map((post, index) => (
+                  <tr
+                    key={post.id}
+                    className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                  >
+                    <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
+                      {post.title}
+                    </td>
+                    <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
+                      {post.published_at && formatDate(post.published_at)}
+                    </td>
+                    <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-nowrap">
+                      {post.updated_at && formatDate(post.updated_at)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {post.is_published ? (
+                        <span className="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                          Published
+                        </span>
+                      ) : (
+                        <span className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">
+                          Draft
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-nowrap">
+                      <Link href={`/posts/${post.id}`}>
+                        <a className="text-indigo-600 hover:text-indigo-900">
+                          Edit
+                        </a>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+      <nav
+        className="flex items-center justify-between px-4 py-3 bg-white border-gray-200 shadow sm:px-6 sm:rounded-b-lg"
+        aria-label="Pagination"
+      >
+        <div className="hidden sm:block">
+          <p className="text-sm text-gray-700">
+            Showing <span className="font-medium">{posts.meta.from}</span> to{" "}
+            <span className="font-medium">{posts.meta.to}</span> of{" "}
+            <span className="font-medium">{posts.meta.total}</span> results
+          </p>
+        </div>
+        <div className="flex justify-between flex-1 sm:justify-end">
+          <a
+            href="#"
+            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Previous
+          </a>
+          <a
+            href="#"
+            className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          >
+            Next
+          </a>
+        </div>
+      </nav>
+    </>
   );
 };
 
