@@ -7,6 +7,7 @@ import LoadingSpinner from "../../components/loadingSpinner";
 import Overlay from "../../components/overlay";
 import usePostCollection from "../../hooks/usePostCollection";
 import { formatDate } from "../../libs/helper";
+import Button from "../../components/button";
 
 const Posts: NextPageWithLayout = () => {
   const { posts, loading } = usePostCollection();
@@ -137,18 +138,8 @@ const Posts: NextPageWithLayout = () => {
           </p>
         </div>
         <div className="flex justify-between flex-1 sm:justify-end">
-          <a
-            href="#"
-            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-          >
-            Previous
-          </a>
-          <a
-            href="#"
-            className="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-          >
-            Next
-          </a>
+          <Button>Previous</Button>
+          <Button className="ml-3">Next</Button>
         </div>
       </nav>
     </>
