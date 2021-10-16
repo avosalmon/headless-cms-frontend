@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PostCollection } from "../../types/post";
+import { Post, PostCollection, PostResponse } from "../../types/post";
 
 const POST_PATH = "posts";
 
@@ -25,6 +25,16 @@ export async function getPosts(
     return data;
   } catch (error) {
     console.log("Failed to get posts", error);
+    return null;
+  }
+}
+
+export async function createPost(payload: Partial<Post>): Promise<Post | null> {
+  try {
+    const { data } = await axios.post<PostResponse>(POST_PATH, payload);
+    return data.data;
+  } catch (error) {
+    console.log("Failed to create a post", error);
     return null;
   }
 }

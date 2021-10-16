@@ -50,3 +50,7 @@ export interface PostCollection {
     }[];
   };
 }
+
+export interface PostResponse {
+  data: Post;
+}
