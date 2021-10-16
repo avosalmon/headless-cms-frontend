@@ -3,6 +3,8 @@ import Link from "next/link";
 import { PlusIcon } from "@heroicons/react/solid";
 import { NextPageWithLayout } from "../_app";
 import { Dashboard, Protected } from "../../layouts";
+import LoadingSpinner from "../../components/loadingSpinner";
+import Overlay from "../../components/overlay";
 import usePostCollection from "../../hooks/usePostCollection";
 import { formatDate } from "../../libs/helper";
 
@@ -43,8 +45,12 @@ const Posts: NextPageWithLayout = () => {
   );
 
   if (loading) {
-    // TODO: render loading animation
-    return <div>Loading posts...</div>;
+    return (
+      <Overlay>
+        <LoadingSpinner />
+        <div className="mt-4 text-white">Loading posts...</div>
+      </Overlay>
+    );
   }
 
   if (!posts) {

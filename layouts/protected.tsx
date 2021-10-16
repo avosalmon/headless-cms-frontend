@@ -1,6 +1,8 @@
-import { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { useRouter } from "next/dist/client/router";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Overlay from "../components/overlay";
+import LoadingSpinner from "../components/loadingSpinner";
 
 interface Props {
   children: ReactNode;
@@ -17,9 +19,13 @@ export default function Protected({ children }: Props): JSX.Element {
   }, [user, loading, router]);
 
   if (loading) {
-    return <p>Loading auth state...</p>;
+    return (
+      <Overlay>
+        <LoadingSpinner />
+        <div className="mt-4 text-white">Booting app...</div>
+      </Overlay>
+    );
   }
 
-  // TODO: show loading animation while loading
   return <>{children}</>;
 }

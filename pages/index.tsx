@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/dist/client/router";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Overlay from "../components/overlay";
+import LoadingSpinner from "../components/loadingSpinner";
 
 const Home: NextPage = () => {
   const { user, loading } = useAuthContext();
@@ -19,7 +21,12 @@ const Home: NextPage = () => {
     }
   }, [user, loading, router]);
 
-  return <p>Loading auth state...</p>;
+  return (
+    <Overlay>
+      <LoadingSpinner />
+      <div className="mt-4 text-white">Booting app...</div>
+    </Overlay>
+  );
 };
 
 export default Home;
