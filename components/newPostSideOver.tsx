@@ -1,9 +1,15 @@
-import { forwardRef, Fragment, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  Fragment,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import TextInput from "./textInput";
+import FormLabel from "./formLabel";
 
 export interface NewPostSideOverRef {
   open: () => void;
@@ -92,12 +98,7 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
                         <div className="px-4 divide-y divide-gray-200 sm:px-6">
                           <div className="pt-6 pb-5 space-y-6">
                             <div>
-                              <label
-                                htmlFor="title"
-                                className="block text-sm font-medium text-gray-900"
-                              >
-                                Post Title
-                              </label>
+                              <FormLabel htmlFor="title">Post Title</FormLabel>
                               <div className="mt-1">
                                 <Field
                                   id="title"
@@ -108,12 +109,7 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
                               </div>
                             </div>
                             <div>
-                              <label
-                                htmlFor="slug"
-                                className="block text-sm font-medium text-gray-900"
-                              >
-                                Post Slug
-                              </label>
+                              <FormLabel htmlFor="slug">Post Slug</FormLabel>
                               <div className="mt-1">
                                 <Field
                                   id="slug"
