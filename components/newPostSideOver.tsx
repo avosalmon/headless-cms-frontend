@@ -11,6 +11,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import TextInput from "./textInput";
 import FormLabel from "./formLabel";
+import { createPost } from "../libs/api/post";
 
 export interface NewPostSideOverRef {
   open: () => void;
@@ -39,10 +40,14 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
     slug: Yup.string().required("Post slug is required"),
   });
 
-  const onSubmit = (values: { title: string; slug: string }) => {
-    console.log(values);
-    // TODO: create a post
-    router.push("/posts/1");
+  const onSubmit = async ({ title, slug }: { title: string; slug: string }) => {
+    const post = await createPost({
+      title,
+      slug,
+      content: "Let's start writing your blog post with Markdown!",
+      excerpt: title,
+    });
+    router.push(`/posts/${post?.id}`);
   };
 
   return (
