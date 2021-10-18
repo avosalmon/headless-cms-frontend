@@ -12,6 +12,7 @@ import * as Yup from "yup";
 import TextInput from "./textInput";
 import FormLabel from "./formLabel";
 import { createPost } from "../libs/api/post";
+import LoadingSpinner from "./loadingSpinner";
 
 export interface NewPostSideOverRef {
   open: () => void;
@@ -149,8 +150,16 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
                       <button
                         type="submit"
                         className="inline-flex justify-center px-4 py-2 ml-4 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        disabled={loading}
                       >
-                        Start writing
+                        {loading ? (
+                          <div className="flex items-center">
+                            <LoadingSpinner />
+                            <span className="ml-2">Processing</span>
+                          </div>
+                        ) : (
+                          "Start writing"
+                        )}
                       </button>
                     </div>
                   </Form>
