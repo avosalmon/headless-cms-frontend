@@ -29,6 +29,16 @@ export async function getPosts(
   }
 }
 
+export async function getPost(id: string): Promise<Post | null> {
+  try {
+    const { data } = await axios.get<PostResponse>(`${POST_PATH}/${id}`);
+    return data.data;
+  } catch (error) {
+    console.log("Failed to create a post", error);
+    return null;
+  }
+}
+
 export async function createPost(payload: Partial<Post>): Promise<Post | null> {
   try {
     const { data } = await axios.post<PostResponse>(POST_PATH, payload);
