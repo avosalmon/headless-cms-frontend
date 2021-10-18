@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
+import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { Formik, Form, Field } from "formik";
@@ -17,6 +18,7 @@ export interface NewPostSideOverRef {
 }
 
 const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   useImperativeHandle(
@@ -36,6 +38,12 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
     title: Yup.string().required("Post title is required"),
     slug: Yup.string().required("Post slug is required"),
   });
+
+  const onSubmit = (values: { title: string; slug: string }) => {
+    console.log(values);
+    // TODO: create a post
+    router.push("/posts/1");
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -63,9 +71,7 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
                     title: "",
                     slug: "",
                   }}
-                  onSubmit={(values) => {
-                    console.log(values);
-                  }}
+                  onSubmit={onSubmit}
                   validationSchema={validationSchema}
                 >
                   <Form className="flex flex-col h-full bg-white divide-y divide-gray-200 shadow-xl">
