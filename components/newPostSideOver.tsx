@@ -21,6 +21,7 @@ export interface NewPostSideOverRef {
 const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useImperativeHandle(
     ref,
@@ -41,12 +42,15 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
   });
 
   const onSubmit = async ({ title, slug }: { title: string; slug: string }) => {
+    setLoading(true);
     const post = await createPost({
       title,
       slug,
       content: "Let's start writing your blog post with Markdown!",
       excerpt: title,
     });
+    setLoading(false);
+
     router.push(`/posts/${post?.id}`);
   };
 
