@@ -154,7 +154,7 @@ const NewPostSideOver = forwardRef<NewPostSideOverRef>((props, ref) => {
                       >
                         {loading ? (
                           <div className="flex items-center">
-                            <LoadingSpinner />
+                            <LoadingSpinner size="small" />
                             <span className="ml-2">Processing</span>
                           </div>
                         ) : (
