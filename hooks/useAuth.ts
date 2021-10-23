@@ -9,13 +9,7 @@ import {
 } from "firebase/auth";
 import auth from "../libs/firebaseAuth";
 import { createUser, findUser } from "../libs/api/user";
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-}
+import { User } from "../types/user";
 
 export interface Auth {
   user: User | null;
@@ -37,18 +31,13 @@ export default function useAuth(): Auth {
       return;
     }
 
-    let apiUser = await findUser(firebaseUser.uid);
+    let user = await findUser(firebaseUser.uid);
 
-    if (!apiUser) {
-      apiUser = await createUser();
+    if (!user) {
+      user = await createUser();
     }
 
-    if (apiUser) {
-      setUser({ ...apiUser });
-    } else {
-      setUser(null);
-    }
-
+    setUser(user);
     setLoading(false);
   };
 
