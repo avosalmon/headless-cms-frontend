@@ -6,6 +6,7 @@ import usePost from "../../hooks/usePost";
 import Overlay from "../../components/overlay";
 import LoadingSpinner from "../../components/loadingSpinner";
 import Link from "next/link";
+import PostTitle from "../../components/postTitle";
 
 const PostEdit: NextPageWithLayout = () => {
   const router = useRouter();
@@ -70,6 +71,10 @@ const PostEdit: NextPageWithLayout = () => {
           )}
         </div>
       </nav>
+      <PostTitle
+        title={post.title}
+        onChange={(value: string) => console.log("Title updated", value)}
+      />
     </>
   );
 };
