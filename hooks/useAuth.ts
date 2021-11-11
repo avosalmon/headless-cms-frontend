@@ -55,7 +55,7 @@ export default function useAuth(): Auth {
     });
   };
 
-  const logOut = () => signOut(auth);
+  const logOut = () => signOut(auth).then(() => setUser(null));
 
   const getProvider = (providerName: string) => {
     switch (providerName) {
