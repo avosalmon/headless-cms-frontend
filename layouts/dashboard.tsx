@@ -7,23 +7,23 @@ interface Props {
   children: ReactNode;
 }
 
-const navigation = [
-  { name: "Posts", href: "#", current: true },
-  { name: "Pages", href: "#", current: false },
-  { name: "Tags", href: "#", current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Dashboard({ children }: Props): JSX.Element {
-  const { user } = useAuthContext();
+  const { user, logOut } = useAuthContext();
+
+  const navigation = [
+    { name: "Posts", href: "#", current: true },
+    { name: "Pages", href: "#", current: false },
+    { name: "Tags", href: "#", current: false },
+  ];
+  const userNavigation = [
+    { name: "Your Profile", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Sign out", href: "#", onClick: () => logOut() },
+  ];
 
   if (!user) {
     return <></>;
@@ -105,6 +105,7 @@ export default function Dashboard({ children }: Props): JSX.Element {
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
                                   )}
+                                  onClick={item.onClick}
                                 >
                                   {item.name}
                                 </a>
@@ -179,6 +180,7 @@ export default function Dashboard({ children }: Props): JSX.Element {
                       key={item.name}
                       href={item.href}
                       className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:text-white hover:bg-gray-700"
+                      onClick={item.onClick}
                     >
                       {item.name}
                     </a>
